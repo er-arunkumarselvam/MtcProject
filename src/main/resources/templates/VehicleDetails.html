@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Information Form</title>
+    <link rel="stylesheet" th:href="@{/CSS/VehicleDetails.css}">
+</head>
+<body>
+    <div class="form-container">
+        <form id="vehicleForm" action="/admin/regVehicle" method="post">
+            <h2>Vehicle Information</h2>
+            <div class="form-group">
+                <label for="vehicleFleetNumberPojo">Vehicle Fleet Number</label>
+                <input type="text" id="vehicleFleetNumberPojo" name="vehicleFleetNumberPojo" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicleServiceRoutePojo">Vehicle Service Route</label>
+                <input type="text" id="vehicleServiceRoutePojo" name="vehicleServiceRoutePojo" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicleDateOfCommencementPojo">Date of Commencement</label>
+                <input type="date" id="vehicleDateOfCommencementPojo" name="vehicleDateOfCommencementPojo" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicleModalPojo">Vehicle Model</label>
+                <input type="text" id="vehicleModalPojo" name="vehicleModalPojo" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script th:src="@{/JS/VehicleDetails.js}"></script>
+</body>
+</html>
