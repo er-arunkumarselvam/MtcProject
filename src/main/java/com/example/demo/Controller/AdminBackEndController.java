@@ -41,6 +41,7 @@ public class AdminBackEndController {
 	{
 		System.out.println("im in staff ");
 		addStaffDataFromEntityToDataBaseObj.addStaffDetailsToDataBase(staffDetailsPojoObj);
+		System.out.println(staffDetailsPojoObj);
 		return staffDetailsPojoObj;
 		
 	}

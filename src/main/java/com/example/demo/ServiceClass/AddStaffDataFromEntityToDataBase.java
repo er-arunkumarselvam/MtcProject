@@ -28,7 +28,6 @@ public class AddStaffDataFromEntityToDataBase {
 		staffDetailsEntityObj.setStaffMobileNumberEntity(staffDetailsPojoObj.getStaffMobileNumberPojo());
 		staffDetailsEntityObj.setStaffMailIdEntity(staffDetailsPojoObj.getStaffMailIdPojo());
 		setStaffPasswordForEntity(staffDetailsPojoObj);
-		
 	}
 	
 	public void setStaffPasswordForEntity(StaffDetailsPojo staffDetailsPojoObj)
