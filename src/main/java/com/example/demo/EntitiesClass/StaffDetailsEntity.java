@@ -20,5 +20,6 @@ public class StaffDetailsEntity {
 	private Long staffMobileNumberEntity;
 	private String staffMailIdEntity;
 	private String staffPasswordEntity;	
+	private String staffRoleEntity;
 
 }

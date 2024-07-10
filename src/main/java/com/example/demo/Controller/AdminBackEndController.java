@@ -36,7 +36,7 @@ public class AdminBackEndController {
 	@Qualifier("/FormDetails")
 	public AddFormDataFromEntityToDataBase addFormDataFromEntityToDataBaseObj;
 	
-	@PostMapping("/regStaff")
+	@PostMapping("/StaffReg")
 	public StaffDetailsPojo staffRegistration(StaffDetailsPojo staffDetailsPojoObj)
 	{
 		System.out.println("im in staff ");
@@ -57,7 +57,7 @@ public class AdminBackEndController {
 	@PostMapping("/regForm")
 	public FormDetailsPojo formSubmission(FormDetailsPojo formDetailsPojoObj)
 	{
-		System.out.println("I am Form Submittion ");
+		System.out.println("I am in  Form Submittion ");
 		addFormDataFromEntityToDataBaseObj.addFormDataFromEntityToDataBase(formDetailsPojoObj);
 		return formDetailsPojoObj;
 	}

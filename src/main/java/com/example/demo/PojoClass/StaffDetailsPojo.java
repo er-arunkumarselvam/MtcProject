@@ -20,5 +20,6 @@ public class StaffDetailsPojo {
 	private String staffDesignationPojo;
 	private Long staffMobileNumberPojo;
 	private String staffMailIdPojo;
+	private String staffRolePojo;
 	
 }

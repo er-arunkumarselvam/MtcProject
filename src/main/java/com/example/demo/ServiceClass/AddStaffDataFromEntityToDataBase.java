@@ -2,6 +2,7 @@ package com.example.demo.ServiceClass;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.EntitiesClass.StaffDetailsEntity;
@@ -19,6 +20,9 @@ public class AddStaffDataFromEntityToDataBase {
 	@Qualifier("/StaffRepo")
 	public StaffDetailsRepository staffDetailsRepObj;
 	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	public void addStaffDataFromPojoToEntity(StaffDetailsPojo staffDetailsPojoObj)
 	{
 		System.out.println("Iam in pojo to entity");
@@ -27,6 +31,7 @@ public class AddStaffDataFromEntityToDataBase {
 		staffDetailsEntityObj.setStaffDesignationEntity(staffDetailsPojoObj.getStaffDesignationPojo());
 		staffDetailsEntityObj.setStaffMobileNumberEntity(staffDetailsPojoObj.getStaffMobileNumberPojo());
 		staffDetailsEntityObj.setStaffMailIdEntity(staffDetailsPojoObj.getStaffMailIdPojo());
+		staffDetailsEntityObj.setStaffRoleEntity(staffDetailsPojoObj.getStaffRolePojo());
 		setStaffPasswordForEntity(staffDetailsPojoObj);
 	}
 	
@@ -35,7 +40,7 @@ public class AddStaffDataFromEntityToDataBase {
 		System.out.println("Iam in password ");
 		String password = "";
 		password = password+staffDetailsPojoObj.getStaffNumberPojo()+"@TA";
-		staffDetailsEntityObj.setStaffPasswordEntity(password);
+		staffDetailsEntityObj.setStaffPasswordEntity(passwordEncoder.encode(password));
 	}
 	public void addStaffDetailsToDataBase(StaffDetailsPojo staffDetailsPojoObj)
 	{
