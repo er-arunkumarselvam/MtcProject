@@ -1,0 +1,373 @@
+/* Custom Font Setup */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*  */
+:root {
+  --white: #fefefe;
+  --black: #333;
+  --gray: #a3a3a3;
+  --bg-gray:#f2f2f2;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text-gray: #1f2937;
+  --text-ligth-gray: #4b5563;
+  --border-gray: #ebebeb;
+  --btn-black: #111827;
+  --btn-gray: #1f2937;
+  
+}
+
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  background-color: #fcfcfc;
+  color: var(--black);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.25rem 0;
+}
+
+p {
+  margin: 0.25rem 0;
+}
+
+input {
+  display: inline-block;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--gray);
+}
+
+button {
+  display: inline-block;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid var(--gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Responsive Grid System */
+.container-fluid {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 1280px;
+}
+
+.container {
+  width: 91.666667%;
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 1280px;
+}
+
+/* Login Page */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.login {
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid var(--border-gray);
+  border-radius: 20px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.login__image {
+  width: 373px;
+}
+
+.login__image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right;
+  border-radius: 20px 0 0 20px;
+}
+
+.login__content {
+  width: 373px;
+  padding: 50px 40px;
+}
+
+.login__title, .scanner__title {
+  font-weight: 600;
+  color: var(--text-gray);
+}
+
+.login__subtitle {
+  color: var(--text-ligth-gray);
+  font-size: 14px;
+}
+
+.login__form {
+  margin: 12px 0;
+}
+.login__input-section{
+ margin: 20px 0;
+}
+.login__input {
+  padding: 12px;
+}
+
+.login__btn {
+  display: block;
+  height: 36px;
+  width: 100px;
+  background: var(--btn-black);
+  color: var(--white);
+}
+
+.login__btn:hover {
+  background: var(--btn-gray);
+  color: var(--white);
+}
+
+.login__info {
+  margin: 20px 0 0;
+}
+
+.login__info-text {
+  font-size: 12px;
+  color: var(--text-ligth-gray);
+}
+
+.login__error {
+  color: var(--red);
+  font-size: 12px;
+}
+
+/* Scanner */
+.scanner{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.scanner__desc{
+  font-size: 14px;
+  color: var(--text-ligth-gray);
+}
+.scanner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background: var(--btn-black);
+  color: var(--white);
+}
+.scan-button:hover{
+  background: var(--btn-gray);
+    color: var(--white);
+}
+.video-scanner {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+}
+
+.hidden {
+  display: block;
+}
+
+.error {
+  color: var(--red);
+  margin-top: 10px;
+}
+/* Form */
+.form-container {
+  height: 100vh;
+}
+.form-header{
+  margin: 25px ;
+}
+.form-details{
+  line-height: 2;
+  margin: 10px 0;
+  background: var(--bg-gray);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+/* Remark Form */
+.remark-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-title{
+  font-weight: 600;
+  text-align: center;
+}
+.remark-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.form-label {
+  grid-row: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-gray);
+}
+
+.form-textarea {
+  grid-row: 2;
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--text-ligth-gray);
+  border-radius: 8px;
+  outline: noen;
+  resize: none;
+}
+.info-text{
+  grid-row: 3;
+  text-align: right;
+}
+.form-btn {
+  grid-row: 4;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--btn-black);
+  color: var(--white);  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.form-btn:hover {
+  background: var(--btn-gray);
+    color: var(--white);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+
+  /* Login Page */
+  .container-fluid {
+    margin: 0;
+    padding: 0;
+  }
+
+  .login-container {
+    display: block;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .login {
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .login__image {
+    width: 100%;
+    height: auto;
+  }
+
+  .login__image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  .login__content {
+    width: 100%;
+    height: auto;
+    padding: 30px;
+    box-shadow: 0px -30px 60px 45px rgb(255, 255, 255);
+  }
+
+  .login__icon,.scanner__icon {
+    display: block;
+    width: 100px;
+    height: 75px;
+    margin: 0 auto;
+  }
+
+  .login__title, .scanner__title {
+    text-align: center;
+  }
+
+  .login__subtitle {
+    display: block;
+    text-align: center;
+  }
+
+  .login__btn {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .login__info {
+    text-align: center;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1234px) {
+  .login {
+      width: 95%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: 1px solid var(--border-gray);
+      border-radius: 20px;
+      box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+}
+
