@@ -1,16 +1,22 @@
 package com.example.demo.ServiceClass;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.EntitiesClass.StaffDetailsEntity;
+import com.example.demo.EntitiesClass.VehicleDetailsEntity;
 import com.example.demo.PojoClass.StaffDetailsPojo;
+import com.example.demo.PojoClass.VehicleDetailsPojo;
 import com.example.demo.RepositoryClass.StaffDetailsRepository;
 
 @Service("/StaffDetails")
-public class AddStaffDataFromEntityToDataBase {
+public class StaffEntityDataTransferManager {
 	
 	@Autowired
 	@Qualifier("/StaffEntity")
@@ -23,15 +29,14 @@ public class AddStaffDataFromEntityToDataBase {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private DataTransferClass dataTransferClassObj;
+	
+	
 	public void addStaffDataFromPojoToEntity(StaffDetailsPojo staffDetailsPojoObj)
 	{
 		System.out.println("Iam in pojo to entity");
-		staffDetailsEntityObj.setStaffNameEntity(staffDetailsPojoObj.getStaffNamePojo());
-		staffDetailsEntityObj.setStaffNumberEntity(staffDetailsPojoObj.getStaffNumberPojo());
-		staffDetailsEntityObj.setStaffDesignationEntity(staffDetailsPojoObj.getStaffDesignationPojo());
-		staffDetailsEntityObj.setStaffMobileNumberEntity(staffDetailsPojoObj.getStaffMobileNumberPojo());
-		staffDetailsEntityObj.setStaffMailIdEntity(staffDetailsPojoObj.getStaffMailIdPojo());
-		staffDetailsEntityObj.setStaffRoleEntity(staffDetailsPojoObj.getStaffRolePojo());
+		staffDetailsEntityObj = dataTransferClassObj.staffDetailsPojoToEntity(staffDetailsPojoObj);
 		setStaffPasswordForEntity(staffDetailsPojoObj);
 	}
 	
@@ -45,7 +50,23 @@ public class AddStaffDataFromEntityToDataBase {
 	public void addStaffDetailsToDataBase(StaffDetailsPojo staffDetailsPojoObj)
 	{
 		addStaffDataFromPojoToEntity(staffDetailsPojoObj);
-		staffDetailsRepObj.save(staffDetailsEntityObj);
-		
+		staffDetailsRepObj.save(staffDetailsEntityObj);	
 	}
+	
+    // READ ALL DATA
+    public List<StaffDetailsPojo> getAllStaffDetailsFromDataBase() {
+        Iterable<StaffDetailsEntity> data = staffDetailsRepObj.findAll();
+        List<StaffDetailsEntity> dataList = new ArrayList<>();
+        data.forEach(dataList::add); // Convert Iterable to List
+        
+        //list of entity to list of pojo
+        List<StaffDetailsPojo> pojoList = dataList.stream()
+                .map(dataTransferClassObj::staffDetailsEntityToPojo)
+                .collect(Collectors.toList());
+        return pojoList;
+    }
+	
+	
+	
+	
 }

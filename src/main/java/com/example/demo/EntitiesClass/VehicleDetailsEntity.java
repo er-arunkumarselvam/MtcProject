@@ -15,6 +15,7 @@ public class VehicleDetailsEntity {
 	
 	@Id
 	private String vehicleFleetNumberEntity ;
+	
 	private String vehicleServiceRouteEntity;
 	private String vehicleDateOfCommencementEntity;
 	private String vehicleModalEntity;
