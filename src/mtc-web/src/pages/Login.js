@@ -26,6 +26,7 @@ export default function Login() {
                 return rest;
             });
         }
+        
     };
 
     const validateForm = () => {
@@ -36,13 +37,19 @@ export default function Login() {
         return Object.keys(newErrors).length === 0;
     };
 
+    
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
+        
         if (!validateForm()) return;
-
+        
         try {
-            const response = await axios.post(`${CONFIG.URL}/admin/login`, formData, {
+            debugger;
+            const response = await axios.post(`${CONFIG.URL}/admin/login`, {
+                username:formData.username,
+                password:formData.password
+            }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -56,6 +63,7 @@ export default function Login() {
             }
         } catch (err) {
             console.error(err);
+            
             setErrorMessage('An error occurred. Please try again.');
         }
     };
