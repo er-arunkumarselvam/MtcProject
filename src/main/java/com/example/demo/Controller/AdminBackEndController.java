@@ -2,8 +2,17 @@ package com.example.demo.Controller;
 
 import java.util.List;
 
+import javax.naming.AuthenticationException;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +30,15 @@ import com.example.demo.ServiceClass.FormEntityDataTransferManager;
 import com.example.demo.ServiceClass.StaffEntityDataTransferManager;
 import com.example.demo.ServiceClass.VehicleEntityDataTransferManager;
 
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admins")
 public class AdminBackEndController {
+	
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	@Qualifier("/StaffDetails")
@@ -92,6 +106,8 @@ public class AdminBackEndController {
 	public String userHomePage() {
 		return "I am in user home ";
 	}
+	
+
 	
 
 }
