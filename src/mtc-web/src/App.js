@@ -1,18 +1,24 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/pages/Login";
-import Scanner from "./components/pages/Scanner";
-import Form from "./components/pages/Form";
+import Login from "./pages/Login";
+import Scanner from "./pages/Scanner";
+import Form from "./pages/Form";
+import { Provider } from "react-redux";
+import store from "./store/store"
 
 function App() {
   return (
     <>
-    <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
       <Routes>
         <Route path="/" Component={Login}/>
         <Route path="/scanner" Component={Scanner}/>
         <Route path="/form" Component={Form}/>
       </Routes>
     </BrowserRouter>
+
+    </Provider>
+    
   
     
     </>
