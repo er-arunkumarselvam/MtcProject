@@ -18,10 +18,11 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("checking");
+        System.out.println("---------------"+username);
         Optional<StaffDetailsEntity> user = staffDetailsRepoObj.findByStaffNumberEntity(username);
         if (user.isPresent()) {
             var userObj = user.get();
+            System.out.println("---------im loadUserByUsername if ");
             return User.builder()
                     .username(userObj.getStaffNumberEntity())
                     .password(userObj.getStaffPasswordEntity())
@@ -29,6 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
                     .build();
 
         } else {
+        	System.out.println("---------im loadUserByUsername else --if ");
             throw new UsernameNotFoundException(username);
         }
 

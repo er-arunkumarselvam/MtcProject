@@ -16,9 +16,9 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         boolean isAdmin = authentication.getAuthorities().stream()
                 .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_admin"));
         if (isAdmin) {
-            setDefaultTargetUrl("/admin/adminHome");
+            setDefaultTargetUrl("/admins/adminHome");
         } else {
-            setDefaultTargetUrl("/user/userHome");
+            setDefaultTargetUrl("/admins/userHome");
         }
         super.onAuthenticationSuccess(request, response, authentication);
     }
