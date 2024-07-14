@@ -36,17 +36,10 @@ public class SecurityConfiguration {
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
             .authorizeHttpRequests(registry -> {
                 registry.requestMatchers("/admin/StaffReg", "/adminView/StaffReg/**").permitAll();
+                registry.requestMatchers("/admins/**").authenticated(); // Ensure these URLs are accessible after login
                 registry.requestMatchers("/admin/**").hasRole("admin");
                 registry.requestMatchers("/user/**").hasRole("user");
                 registry.anyRequest().authenticated();
-            })
-            .formLogin(httpSecurityFormLoginConfigurer -> {
-                httpSecurityFormLoginConfigurer
-                    .loginPage("/admin/login")
-                    .usernameParameter("username") // Specify custom parameter name for username
-                    .passwordParameter("password")    
-                    .successHandler(new AuthenticationSuccessHandler())
-                    .permitAll();
             })
             .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
@@ -84,8 +77,16 @@ public class SecurityConfiguration {
 
     @Bean
     public CustomAuthenticationFilter customAuthenticationFilter() {
-        CustomAuthenticationFilter filter = new CustomAuthenticationFilter(authenticationManager(), new ObjectMapper());
-        filter.setFilterProcessesUrl("/admin/login"); // Ensure this matches your form login URL
-        return filter;
+        return new CustomAuthenticationFilter(authenticationManager(), new ObjectMapper(), customAuthenticationSuccessHandler(), customAuthenticationFailureHandler());
+    }
+
+    @Bean
+    public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public CustomAuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
     }
 }

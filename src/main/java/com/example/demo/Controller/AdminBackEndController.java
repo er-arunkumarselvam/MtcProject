@@ -33,7 +33,7 @@ import com.example.demo.ServiceClass.VehicleEntityDataTransferManager;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/admins")
+//@RequestMapping("/admins")
 public class AdminBackEndController {
 	
 	
@@ -97,15 +97,7 @@ public class AdminBackEndController {
 		return formEntityDataTransferManager.getAllFormDetailsFromDataBase();
 	}
 	
-	@GetMapping("/adminHome")
-	public String adminHomePage() {
-		return "I am in admin home";
-	}
-	
-	@GetMapping("/userHome")
-	public String userHomePage() {
-		return "I am in user home ";
-	}
+
 	
 
 	
