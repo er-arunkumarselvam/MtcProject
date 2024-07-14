@@ -1,6 +1,10 @@
 package com.example.demo.Security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -43,15 +47,27 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         }
     }
 
+
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         System.out.println("Authentication successful!");
         successHandler.onAuthenticationSuccess(request, response, authResult);
+        // Custom behavior on successful authentication (e.g., return a JSON response)
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"success\":\"Login successful\"}");
+        response.getWriter().flush();
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         System.out.println("Authentication failed: " + failed.getMessage());
         failureHandler.onAuthenticationFailure(request, response, failed);
+        // Custom behavior on unsuccessful authentication (e.g., return a JSON response)
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"message\":\"Login failed\"}");
+        response.getWriter().flush();
+
     }
 }

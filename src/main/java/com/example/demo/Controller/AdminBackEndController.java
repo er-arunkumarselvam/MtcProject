@@ -97,7 +97,11 @@ public class AdminBackEndController {
 		return formEntityDataTransferManager.getAllFormDetailsFromDataBase();
 	}
 	
-
+	@GetMapping("/change")
+	public String check()
+	{
+		return "im working";
+	}
 	
 
 	
