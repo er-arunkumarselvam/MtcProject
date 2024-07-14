@@ -26,10 +26,10 @@ const AppRoutes = () => {
       {showNavbar && <UserNavbar />}
       <Routes>
         <Route path="/" Component={Login} />
-        <Route Component={ProtectedRoute}>
+        {/* <Route Component={ProtectedRoute}> */}
           <Route path="/scanner" Component={Scanner} />
           <Route path="/form" Component={Form} />
-        </Route>
+        {/* </Route> */}
       </Routes>
     </>
   );
