@@ -45,7 +45,6 @@ export default function Login() {
         if (!validateForm()) return;
         
         try {
-            debugger;
             const response = await axios.post(`${CONFIG.URL}/admin/login`, {
                 username:formData.username,
                 password:formData.password
@@ -56,12 +55,14 @@ export default function Login() {
             });
 
             if (response.data.success) {
-                // dispatch(setUser(true));
+                console.log(response.data.success);
+                dispatch(setUser(true));
                 navigate("/scanner");
             } else {
                 setErrorMessage(response.data.message);
             }
         } catch (err) {
+            dispatch(setUser(false));
             console.error(err);
             
             setErrorMessage('An error occurred. Please try again.');

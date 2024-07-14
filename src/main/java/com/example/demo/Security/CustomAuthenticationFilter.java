@@ -1,16 +1,15 @@
 package com.example.demo.Security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Map;
@@ -41,11 +40,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         return super.attemptAuthentication(request, response);
     }
 
+
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         // Custom behavior on successful authentication (e.g., return a JSON response)
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().write("{\"message\":\"Login successful\"}");
+        response.setContentType("application/json");
+        response.getWriter().write("{\"success\":\"Login successful\"}");
         response.getWriter().flush();
     }
 
@@ -53,6 +54,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         // Custom behavior on unsuccessful authentication (e.g., return a JSON response)
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
         response.getWriter().write("{\"message\":\"Login failed\"}");
         response.getWriter().flush();
     }
