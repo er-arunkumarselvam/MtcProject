@@ -19,7 +19,7 @@ import com.example.demo.ServiceClass.VehicleEntityDataTransferManager;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-//@RequestMapping("/admins")
+@RequestMapping("/admins")
 public class AdminBackEndController {
 
 	@Autowired
@@ -70,6 +70,7 @@ public class AdminBackEndController {
 	@GetMapping("/viewStaff")
 	public List<StaffDetailsPojo> getAllStaffDetails()
 	{
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		return staffEntityDataTransferManager.getAllStaffDetailsFromDataBase();
 	}
 	

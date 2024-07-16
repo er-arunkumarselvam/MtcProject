@@ -42,14 +42,13 @@ public class SecurityConfiguration {
             .csrf(AbstractHttpConfigurer::disable)
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
             .authorizeHttpRequests(registry -> {
-                registry.requestMatchers("/admin/StaffReg","/Authenticate", "/adminView/StaffReg/**").permitAll();
-                registry.requestMatchers("/admins/**").authenticated(); // Ensure these URLs are accessible after login
-                registry.requestMatchers("/admin/**").hasRole("admin");
+                registry.requestMatchers("/admins/viewVehicles","/Authenticate", "/adminView/StaffReg/**").permitAll();
+                registry.requestMatchers("/admins/**").hasRole("admin");
                 registry.requestMatchers("/user/**").hasRole("user");
                 registry.anyRequest().authenticated();
             })
-            .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-           // .addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

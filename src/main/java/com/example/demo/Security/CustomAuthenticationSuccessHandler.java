@@ -34,7 +34,8 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
 
         String username = authentication.getName();
         UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
-
+        String token = jwtServiceObj.generateToken(userDetails);
+        
         boolean isAdmin = authentication.getAuthorities().stream()
                 .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_admin"));
 
@@ -42,12 +43,12 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         if (isAdmin) {
             System.out.println("im in admin");
             result.put("message", "Welcome Admin!");
-            String token = jwtServiceObj.generateToken(userDetails);
             result.put("token",token);
             result.put("redirectUrl", "/admins/adminHome");
             System.out.println("Redirecting to /admins/adminHome");
         } else {
             result.put("message", "Welcome User!");
+            result.put("token",token);
             result.put("redirectUrl", "/admins/userHome");
         }
 
