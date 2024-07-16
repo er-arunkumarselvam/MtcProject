@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.example.demo.webToken.JwtAuthenticationFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
@@ -28,6 +29,12 @@ public class SecurityConfiguration {
     UserDetailsService userDetailsService() {
         return new MyUserDetailsService();
     }
+    
+    @Bean
+    public JwtAuthenticationFilter customJwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -35,13 +42,15 @@ public class SecurityConfiguration {
             .csrf(AbstractHttpConfigurer::disable)
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
             .authorizeHttpRequests(registry -> {
-                registry.requestMatchers("/admin/StaffReg", "/adminView/StaffReg/**").permitAll();
+                registry.requestMatchers("/admin/StaffReg","/Authenticate", "/adminView/StaffReg/**").permitAll();
                 registry.requestMatchers("/admins/**").authenticated(); // Ensure these URLs are accessible after login
                 registry.requestMatchers("/admin/**").hasRole("admin");
                 registry.requestMatchers("/user/**").hasRole("user");
                 registry.anyRequest().authenticated();
             })
             .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+           // .addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
         return httpSecurity.build();
     }
 
