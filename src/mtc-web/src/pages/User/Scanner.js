@@ -1,6 +1,6 @@
 import React from 'react'
-import ScannerElement from '../components/ScannerElement'
-import icon from '../assets/images/newlogo.png';
+import ScannerElement from '../../components/ScannerElement'
+import icon from '../../assets/images/newlogo.png';
 
 export default function Scanner() {
   return (

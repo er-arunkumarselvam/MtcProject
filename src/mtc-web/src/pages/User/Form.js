@@ -1,6 +1,6 @@
 import React from 'react'
-import RemarkForm from '../components/RemarkForm';
-import icon from '../assets/images/newlogo.png';
+import RemarkForm from '../../components/RemarkForm';
+import icon from '../../assets/images/newlogo.png';
 
 export default function Form() {
   return (

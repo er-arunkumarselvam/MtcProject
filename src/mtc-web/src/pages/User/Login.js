@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import busImage from '../assets/images/bus.jpg';
-import icon from '../assets/images/newlogo.png';
+import busImage from '../../assets/images/bus.jpg';
+import icon from '../../assets/images/newlogo.png';
 import axios from "axios";
-import CONFIG from '../Config';
+import CONFIG from '../../Config';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../slice/userSlice';
+import { setUser } from '../../slice/userSlice';
 
 export default function Login() {
     const [formData, setFormData] = useState({ username: '', password: '' });
