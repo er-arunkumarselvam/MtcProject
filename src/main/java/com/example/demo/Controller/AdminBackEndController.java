@@ -1,6 +1,11 @@
 package com.example.demo.Controller;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,9 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.EntitiesClass.FormDetailsEntity;
+import com.example.demo.EntitiesClass.StaffDetailsEntity;
+import com.example.demo.EntitiesClass.VehicleDetailsEntity;
 import com.example.demo.PojoClass.FormDetailsPojo;
 import com.example.demo.PojoClass.StaffDetailsPojo;
 import com.example.demo.PojoClass.VehicleDetailsPojo;
+import com.example.demo.RepositoryClass.FormDetailsRepository;
+import com.example.demo.RepositoryClass.StaffDetailsRepository;
+import com.example.demo.RepositoryClass.VechicleDetailsRepository;
 import com.example.demo.ServiceClass.FormEntityDataTransferManager;
 import com.example.demo.ServiceClass.StaffEntityDataTransferManager;
 import com.example.demo.ServiceClass.VehicleEntityDataTransferManager;
@@ -21,7 +33,16 @@ import com.example.demo.ServiceClass.VehicleEntityDataTransferManager;
 @RestController
 @RequestMapping("/admins")
 public class AdminBackEndController {
+	
+	@Autowired
+	FormDetailsRepository FormDetailsRepo;
 
+	@Autowired
+	StaffDetailsRepository  staffDetailsRepo;
+	
+	@Autowired
+	VechicleDetailsRepository vechicleDetailsRepo;
+	
 	@Autowired
 	@Qualifier("/StaffDetails")
 	public StaffEntityDataTransferManager staffEntityDataTransferManager;
@@ -36,29 +57,58 @@ public class AdminBackEndController {
 	public FormEntityDataTransferManager formEntityDataTransferManager;
 	
 	@PostMapping("/StaffReg")
-	public StaffDetailsPojo staffRegistration(@RequestBody StaffDetailsPojo staffDetailsPojoObj)
+	public String staffRegistration(@RequestBody StaffDetailsPojo staffPojoObj)
 	{
 		System.out.println("im in staff ");
-		staffEntityDataTransferManager.addStaffDetailsToDataBase(staffDetailsPojoObj);
-		System.out.println(staffDetailsPojoObj);
-		return staffDetailsPojoObj;
+		Optional<StaffDetailsEntity> staffObj = staffDetailsRepo.findById(staffPojoObj.getStaffNumberPojo());
+		if(staffObj.isEmpty())
+		{
+			staffEntityDataTransferManager.addStaffDetailsToDataBase(staffPojoObj);
+			return "Staff Registration SuccessFull";
+		}
+		else
+			return "Staff is already Registered ";
 		
 	}
 	
 	@PostMapping("/regVehicle")
-	public VehicleDetailsPojo vehicleRegistration(@RequestBody VehicleDetailsPojo vehicleDetailsPojoObj)
+	public String vehicleRegistration(@RequestBody VehicleDetailsPojo vehiclePojoObj)
 	{
 		System.out.println("I am in vehicle Registration");
-		vehicleEntityDataTransferManager.addVechicleDataFromEntityToDataBase(vehicleDetailsPojoObj);
-		return vehicleDetailsPojoObj;
+		Optional <VehicleDetailsEntity> vehicleObj =vechicleDetailsRepo.findById(vehiclePojoObj.getVehicleFleetNumberPojo());
+		if(vehicleObj.isEmpty())
+		{
+			vehicleEntityDataTransferManager.addVechicleDataFromEntityToDataBase(vehiclePojoObj);
+			return "Vehicle Registration SuccessFull";
+		}
+		else
+			return "Vehicle is already Registered ";
 	}
 	
 	@PostMapping("/regForm")
-	public FormDetailsPojo formSubmission(@RequestBody FormDetailsPojo formDetailsPojoObj)
-	{
+	public String formSubmission(@RequestBody FormDetailsPojo formPojoObj)
+	{ 
 		System.out.println("I am in  Form Submittion ");
-		formEntityDataTransferManager.addFormDataFromEntityToDataBase(formDetailsPojoObj);
-		return formDetailsPojoObj;
+		Optional<FormDetailsEntity> formObj = FormDetailsRepo.findById(formPojoObj.getVehicleFleetNumberFormPojo());
+		if(formObj.isPresent())
+		{
+			FormDetailsEntity checkObj = formObj.get();
+			LocalDateTime lastSubmissionTine = checkObj.getDateAndTimeOfSubmition();
+			LocalDateTime currentTime = formEntityDataTransferManager.getSystemDateAndTime();
+			Duration duration = Duration.between(lastSubmissionTine, currentTime);
+			boolean isMoreThan24Hours = duration.toHours() > 24;
+			if (isMoreThan24Hours) {
+				formEntityDataTransferManager.addFormDataFromEntityToDataBase(formPojoObj);
+				return "Inspection Form Submitted Successfully";
+			} else {
+				return "Today Form already Submitted ";
+			}
+		}
+		else {
+			formEntityDataTransferManager.addFormDataFromEntityToDataBase(formPojoObj);
+			return "Inspection Form Submitted Successfully";
+		}
+
 	}
 	
 	@GetMapping("/viewVehicles")

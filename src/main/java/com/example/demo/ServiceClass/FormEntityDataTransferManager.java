@@ -29,25 +29,18 @@ public class FormEntityDataTransferManager{
 	
 	@Autowired
 	private DataTransferClass dataTransferClassObj;
-	
-	public void addSystemDateAndTimeToEntity()
+	 
+	public LocalDateTime getSystemDateAndTime()
 	{
-		LocalDateTime myDateAndTimeObj = LocalDateTime.now();
-		DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
-		DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");  
-		String currentDate = myDateAndTimeObj.format(myDateFormat);
-		String currentTime = myDateAndTimeObj.format(myTimeFormat);
-		formDetailsEntityObj.setDateOfSubmitionFormEntity(currentDate);
-		formDetailsEntityObj.setTimeOfSubmitionFormEntity(currentTime);
-		System.out.println(currentDate);
-		System.out.println(currentTime);
-		System.out.println("------------"+formDetailsEntityObj);
+		LocalDateTime systemDateAndTime = LocalDateTime.now();
+		return systemDateAndTime;
 	}
+
 	public void addFormDataFromPojoToEntity(FormDetailsPojo formDetailsPojoObj)
 	{	
 		formDetailsEntityObj = dataTransferClassObj.formDetailsPojoToEntity(formDetailsPojoObj);
 		System.out.println("------------"+formDetailsEntityObj);
-		addSystemDateAndTimeToEntity();
+		formDetailsEntityObj.setDateAndTimeOfSubmition(getSystemDateAndTime());
 	}
 	
 	public void addFormDataFromEntityToDataBase(FormDetailsPojo formDetailsPojoObj)

@@ -59,22 +59,19 @@ public class DataTransferClass {
 	public FormDetailsEntity formDetailsPojoToEntity(FormDetailsPojo formDetailsPojo)
 	{
 		FormDetailsEntity formEntityObj = new FormDetailsEntity();
-		formEntityObj.setVehicleFleetNumberFormEntity(formDetailsPojo.getVehicleFleetNumberFormPojo());
+		formEntityObj.setVehicleFleetFormEntity(formDetailsPojo.getVehicleFleetNumberFormPojo());
 		formEntityObj.setStaffNumberFormEntity(formDetailsPojo.getStaffNumberFormPojo());
 		formEntityObj.setAdditionalInfoFormEntity(formDetailsPojo.getAdditionalInfoFormPojo());
-		formEntityObj.setDateOfSubmitionFormEntity(formDetailsPojo.getDateOfSubmitionFormPojo());
-		formEntityObj.setTimeOfSubmitionFormEntity(formDetailsPojo.getTimeOfSubmitionFormPojo());
 		return formEntityObj;
 	}
 	
 	public FormDetailsPojo formDetailsEntityToPojo(FormDetailsEntity formDetailsEntity)
 	{
 		FormDetailsPojo formPojoObj = new FormDetailsPojo();
-		formPojoObj.setVehicleFleetNumberFormPojo(formDetailsEntity.getVehicleFleetNumberFormEntity());
+		formPojoObj.setVehicleFleetNumberFormPojo(formDetailsEntity.getVehicleFleetFormEntity());
 		formPojoObj.setStaffNumberFormPojo(formDetailsEntity.getStaffNumberFormEntity());
 		formPojoObj.setAdditionalInfoFormPojo(formDetailsEntity.getAdditionalInfoFormEntity());
-		formPojoObj.setDateOfSubmitionFormPojo(formDetailsEntity.getDateOfSubmitionFormEntity());
-		formPojoObj.setTimeOfSubmitionFormPojo(formDetailsEntity.getTimeOfSubmitionFormEntity());
+		formPojoObj.setDateAndTimeOfSubmition(formDetailsEntity.getDateAndTimeOfSubmition());
 		return formPojoObj;
 	}
 	

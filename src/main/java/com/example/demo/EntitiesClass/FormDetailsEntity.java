@@ -1,5 +1,7 @@
 package com.example.demo.EntitiesClass;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.Entity;
@@ -16,11 +18,10 @@ import lombok.Data;
 public class FormDetailsEntity {
 	@Id
    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String vehicleFleetNumberFormEntity;
+	private String vehicleFleetFormEntity;
 	
 	private String staffNumberFormEntity;
-	private String dateOfSubmitionFormEntity;
-	private String timeOfSubmitionFormEntity;
+	private LocalDateTime dateAndTimeOfSubmition;
 	private String additionalInfoFormEntity;
 	
 

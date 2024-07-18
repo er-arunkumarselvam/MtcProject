@@ -2,6 +2,7 @@ package com.example.demo.ServiceClass;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,20 @@ public class StaffEntityDataTransferManager {
         return pojoList;
     }
 	
+    // UPDATE DATA 
+    public String updateStaffDetails(StaffDetailsPojo staffObj)
+    {
+    	Optional<StaffDetailsEntity> data = staffDetailsRepObj.findById(staffObj.getStaffNumberPojo());
+    	if(data.isPresent())
+    	{
+    		StaffDetailsEntity updatedStaff= data.get();
+    		updatedStaff = dataTransferClassObj.staffDetailsPojoToEntity(staffObj);
+    		staffDetailsRepObj.save(updatedStaff);
+    		return "Successfully updated Staff Details";
+    	}
+    	else
+    		return "Invalid StaffNo";
+    }
 	
 	
 	

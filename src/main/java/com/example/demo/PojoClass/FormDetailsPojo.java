@@ -1,5 +1,7 @@
 package com.example.demo.PojoClass;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
@@ -11,8 +13,7 @@ public class FormDetailsPojo {
 	private String staffNumberFormPojo;
 	private String vehicleFleetNumberFormPojo;
 	private String additionalInfoFormPojo;
-	private String dateOfSubmitionFormPojo;
-	private String timeOfSubmitionFormPojo;
+	private LocalDateTime dateAndTimeOfSubmition;
 	
 
 }

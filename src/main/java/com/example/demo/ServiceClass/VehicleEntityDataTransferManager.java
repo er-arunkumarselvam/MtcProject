@@ -2,6 +2,7 @@ package com.example.demo.ServiceClass;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,20 @@ public class VehicleEntityDataTransferManager {
                 .collect(Collectors.toList());
         return pojoList;
     }
-	
+    
+    // UPDATE DATA 
+    public String updateVehicleDetails(VehicleDetailsPojo vehicleObj)
+    {
+    	Optional<VehicleDetailsEntity> data = vechicleDetailsRepositoryObj.findById(vehicleObj.getVehicleFleetNumberPojo());
+    	if(data.isPresent())
+    	{
+    		VehicleDetailsEntity updatedVehicle = data.get();
+    		updatedVehicle = dataTransferClassObj.vehicleDetailsPojoToEntity(vehicleObj);
+    		vechicleDetailsRepositoryObj.save(updatedVehicle);
+    		return "Successfully updated Vehicle Details";
+    	}
+    	else
+    		return "Invalid FleetNo";
+	}
 }
+
