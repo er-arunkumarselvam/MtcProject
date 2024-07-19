@@ -29,7 +29,7 @@ import com.example.demo.ServiceClass.FormEntityDataTransferManager;
 import com.example.demo.ServiceClass.StaffEntityDataTransferManager;
 import com.example.demo.ServiceClass.VehicleEntityDataTransferManager;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://mtcreact.onrender.com")
 @RestController
 @RequestMapping("/admins")
 public class AdminBackEndController {
