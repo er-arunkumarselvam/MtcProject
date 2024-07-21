@@ -50,7 +50,7 @@
 		    <version>3.1.0</version>
 		</dependency>
 		
-				<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
 		<dependency>
 		    <groupId>io.jsonwebtoken</groupId>
 		    <artifactId>jjwt-impl</artifactId>
@@ -113,6 +113,25 @@
 	      <artifactId>spring-boot-starter-security</artifactId>
 	    </dependency>
 	    
+	    <!-- QR Generator  -->
+		<dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>core</artifactId>
+		    <version>3.4.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>javase</artifactId>
+		    <version>3.4.1</version>
+		</dependency>
+		
+		<!-- Json Dependency -->
+		<dependency>  
+		    <groupId>com.googlecode.json-simple</groupId>  
+		    <artifactId>json-simple</artifactId>  
+		    <version>1.1</version>  
+		</dependency>  
+    
 	    <!-- DataBase-->
 		<dependency>
 	      <groupId>org.postgresql</groupId>
