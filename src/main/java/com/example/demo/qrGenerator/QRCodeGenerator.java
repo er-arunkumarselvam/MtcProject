@@ -7,7 +7,10 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -29,6 +32,9 @@ public class QRCodeGenerator {
         obj.put("redirectingUrl", "/form");
         String jsonText = JSONValue.toJSONString(obj);
         System.out.print(jsonText);
+        // Encoding the JSON data
+        String encodedData = URLEncoder.encode(jsonText, StandardCharsets.UTF_8.toString());
+        String qrUrl = "https://mtcreact.onrender.com/formData?data=" + encodedData;
 
         // Constructing the file path for the QR code image
         String filePath = filePathSource + "/" + fileName + ".png";
@@ -39,11 +45,17 @@ public class QRCodeGenerator {
         try {
             // Generating QR code
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bitMatrix = qrCodeWriter.encode(jsonText, BarcodeFormat.QR_CODE, width, height);
+            BitMatrix bitMatrix = qrCodeWriter.encode(qrUrl, BarcodeFormat.QR_CODE, width, height);
             BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
 
             // Adding additional text to the QR code image
             BufferedImage combined = addTextToImage(qrImage, additionalText, width, height);
+
+            // Ensuring the directory exists
+            File dir = new File(filePathSource);
+            if (!dir.exists()) {
+                dir.mkdirs(); // Create the directory if it does not exist
+            }
 
             // Writing the final image to the specified file path
             Path path = FileSystems.getDefault().getPath(filePath);
