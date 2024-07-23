@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import com.example.demo.RepositoryClass.VechicleDetailsRepository;
 import com.example.demo.ServiceClass.FormEntityDataTransferManager;
 import com.example.demo.ServiceClass.StaffEntityDataTransferManager;
 import com.example.demo.ServiceClass.VehicleEntityDataTransferManager;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @CrossOrigin(origins = "https://mtcreact.onrender.com")
 @RestController
@@ -122,6 +124,13 @@ public class AdminBackEndController {
 	{
 		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		return staffEntityDataTransferManager.getAllStaffDetailsFromDataBase();
+	}
+	
+	@PostMapping("/viewStaffById")
+	public StaffDetailsPojo getStaffDetails(@RequestBody StaffDetailsPojo staffObj)
+	{
+		System.out.println(staffObj.getStaffNumberPojo());
+		return staffEntityDataTransferManager.getStaffDetailsFromDataBase(staffObj.getStaffNumberPojo());
 	}
 	
 	@GetMapping("/viewForm")

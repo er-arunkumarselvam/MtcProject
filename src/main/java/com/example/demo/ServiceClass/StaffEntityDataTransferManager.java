@@ -66,6 +66,19 @@ public class StaffEntityDataTransferManager {
                 .collect(Collectors.toList());
         return pojoList;
     }
+    
+    //READ SINGLE DATA
+    public StaffDetailsPojo getStaffDetailsFromDataBase(String staffNumber) {
+    	System.out.println(staffNumber);
+       Optional<StaffDetailsEntity> data = staffDetailsRepObj.findById(staffNumber);
+       if(data.isPresent()) {
+    	   System.out.println("data is present --------------------");
+    	   StaffDetailsEntity userData = data.get();
+    	   return dataTransferClassObj.staffDetailsEntityToPojo(userData);
+       }
+       System.out.println("data is not present --------------------");
+        return null;
+    }
 	
     // UPDATE DATA 
     public String updateStaffDetails(StaffDetailsPojo staffObj)
