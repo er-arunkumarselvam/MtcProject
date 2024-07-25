@@ -29,7 +29,6 @@ public class QRCodeGenerator {
         // Creating a JSON string with fleetNo and redirecting URL
         Map<String, String> obj = new HashMap<>();
         obj.put("fleetNo", fleetNo);
-        obj.put("redirectingUrl", "/form");
         String jsonText = JSONValue.toJSONString(obj);
         System.out.print(jsonText);
         // Encoding the JSON data

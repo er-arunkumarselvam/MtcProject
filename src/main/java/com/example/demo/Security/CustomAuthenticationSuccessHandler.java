@@ -45,6 +45,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         Map<String, String> result = new HashMap<>();
         result.put("staffName", staffDetails.getStaffNameEntity());
         result.put("staffNumber", staffDetails.getStaffNumberEntity());
+        result.put("Designation", staffDetails.getStaffDesignationEntity());
         boolean isAdmin = authentication.getAuthorities().stream()
                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_admin"));
         if (isAdmin) {

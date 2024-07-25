@@ -43,6 +43,7 @@ public class SecurityConfiguration {
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
             .authorizeHttpRequests(registry -> {
 //                registry.requestMatchers("/admins/viewVehicles","/Authenticate", "/adminView/StaffReg/**").permitAll();
+//                registry.requestMatchers("/admin/login").permitAll(); 
 //                registry.requestMatchers("/admins/**").hasRole("admin");
 //                registry.requestMatchers("/user/**").hasRole("user");
 //                registry.anyRequest().authenticated();
