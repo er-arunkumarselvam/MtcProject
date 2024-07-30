@@ -12,7 +12,7 @@ public class VehicleDetailsPojo {
 	private String vehicleFleetNumberPojo ;
 	private String vehicleServiceRoutePojo;
 	private String vehicleDateOfCommencementPojo;
-	private String vehicleModalPojo;
+	private String vehicleModelPojo;
 	
 
 }

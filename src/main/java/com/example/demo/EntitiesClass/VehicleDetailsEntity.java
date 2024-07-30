@@ -18,6 +18,6 @@ public class VehicleDetailsEntity {
 	
 	private String vehicleServiceRouteEntity;
 	private String vehicleDateOfCommencementEntity;
-	private String vehicleModalEntity;
+	private String vehicleModelEntity;
 
 }

@@ -41,7 +41,7 @@ public class DataTransferClass {
 		VehicleDetailsPojo vehiclePojoObj = new VehicleDetailsPojo();
 		vehiclePojoObj.setVehicleFleetNumberPojo(vehicleDetailsEntity.getVehicleFleetNumberEntity());
 		vehiclePojoObj.setVehicleDateOfCommencementPojo(vehicleDetailsEntity.getVehicleDateOfCommencementEntity());
-		vehiclePojoObj.setVehicleModalPojo(vehicleDetailsEntity.getVehicleModalEntity());
+		vehiclePojoObj.setVehicleModelPojo(vehicleDetailsEntity.getVehicleModelEntity());
 		vehiclePojoObj.setVehicleServiceRoutePojo(vehicleDetailsEntity.getVehicleServiceRouteEntity());
 		return vehiclePojoObj;
 	}
@@ -51,7 +51,7 @@ public class DataTransferClass {
 		VehicleDetailsEntity vehicleEntityObj = new VehicleDetailsEntity();
 		vehicleEntityObj.setVehicleFleetNumberEntity(vehicleDetailsPojo.getVehicleFleetNumberPojo());
 		vehicleEntityObj.setVehicleDateOfCommencementEntity(vehicleDetailsPojo.getVehicleDateOfCommencementPojo());
-		vehicleEntityObj.setVehicleModalEntity(vehicleDetailsPojo.getVehicleModalPojo());
+		vehicleEntityObj.setVehicleModelEntity(vehicleDetailsPojo.getVehicleModelPojo());
 		vehicleEntityObj.setVehicleServiceRouteEntity(vehicleDetailsPojo.getVehicleServiceRoutePojo());
 		return vehicleEntityObj;
 	}
