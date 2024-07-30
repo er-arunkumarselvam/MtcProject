@@ -95,6 +95,20 @@ public class StaffEntityDataTransferManager {
     		return "Invalid StaffNo";
     }
 	
-	
+    //DELETE DATA
+    public String deleteStaffDetails(StaffDetailsPojo staffObj)
+    {
+    	Optional<StaffDetailsEntity> data = staffDetailsRepObj.findById(staffObj.getStaffNumberPojo());
+    	if(data.isPresent())
+    	{
+    		System.out.println("data present -----------------------");
+    		StaffDetailsEntity staffData = data.get();
+    		System.out.println(staffData.getStaffNumberEntity()+"llllllllllllllll");
+    		staffDetailsRepObj.deleteById(staffData.getStaffNumberEntity());
+    		return "Staff Info Successfully Deleted";
+    	}
+    	else
+    		return "Invalid StaffNo";
+    }
 	
 }

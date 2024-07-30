@@ -57,5 +57,19 @@ public class VehicleEntityDataTransferManager {
     	else
     		return "Invalid FleetNo";
 	}
+    
+    //DELETE DATA
+    public String deleteVehicleDetails(VehicleDetailsPojo vehicleObj)
+    {
+    	Optional<VehicleDetailsEntity> data = vechicleDetailsRepositoryObj.findById(vehicleObj.getVehicleFleetNumberPojo());
+    	if(data.isPresent())
+    	{
+    		VehicleDetailsEntity vehicleData = data.get();
+    		vechicleDetailsRepositoryObj.deleteById(vehicleData.getVehicleFleetNumberEntity());
+    		return "Vehicle Info Successfully Deleted";
+    	}
+    	else
+    		return "Invalid FleetNo";
+    }
 }
 

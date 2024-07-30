@@ -15,7 +15,7 @@ import lombok.ToString;
 @Data
 @Service
 public class StaffDetailsPojo {
-	@JsonProperty("username")
+	//@JsonProperty("username")
 	private String staffNumberPojo;
 	
 	private String staffNamePojo;

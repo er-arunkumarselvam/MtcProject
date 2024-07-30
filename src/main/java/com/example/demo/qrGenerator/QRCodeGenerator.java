@@ -34,7 +34,7 @@ public class QRCodeGenerator {
         // Encoding the JSON data
         String encodedData = URLEncoder.encode(jsonText, StandardCharsets.UTF_8.toString());
         String qrUrl = "https://mtcreact.onrender.com/formData?data=" + encodedData;
-
+        System.out.println("qrUrl" + qrUrl);
         // Constructing the file path for the QR code image
         String filePath = filePathSource + "/" + fileName + ".png";
         int width = 300;

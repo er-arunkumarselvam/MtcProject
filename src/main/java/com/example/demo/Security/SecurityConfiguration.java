@@ -52,7 +52,7 @@ public class SecurityConfiguration {
             	registry.anyRequest().permitAll();
             })
             .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+           .addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

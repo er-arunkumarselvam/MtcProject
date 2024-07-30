@@ -35,5 +35,21 @@ public class UpdateAndDeleteController {
 		System.out.println("im in update ");
 		return staffDtmObj.updateStaffDetails(pojoObj);
 	}
+	
+	@PostMapping("delete/vehicleDetails")
+	@ResponseBody
+	public String deleteVehicleDetails(@RequestBody VehicleDetailsPojo pojoObj)
+	{
+		System.out.println("im in delete ");
+		return vehicleDtmObj.deleteVehicleDetails(pojoObj);
+	}
+	
+	@PostMapping("delete/staffDetails")
+	@ResponseBody
+	public String deleteStaffDetails(@RequestBody StaffDetailsPojo pojoObj)
+	{
+		System.out.println("im in delete ");
+		return staffDtmObj.deleteStaffDetails(pojoObj);
+	}
 
 }
