@@ -1,7 +1,7 @@
 package com.example.demo.Security;
 
-import java.util.List;
-
+import com.example.demo.webToken.JwtAuthenticationFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,8 +19,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.example.demo.webToken.JwtAuthenticationFilter;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 @Configuration
 public class SecurityConfiguration {
@@ -29,7 +28,7 @@ public class SecurityConfiguration {
     UserDetailsService userDetailsService() {
         return new MyUserDetailsService();
     }
-    
+
     @Bean
     public JwtAuthenticationFilter customJwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -39,20 +38,20 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-            .csrf(AbstractHttpConfigurer::disable)
-            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
-            .authorizeHttpRequests(registry -> {
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
+                .authorizeHttpRequests(registry -> {
 //                registry.requestMatchers("/admins/viewVehicles","/Authenticate", "/adminView/StaffReg/**").permitAll();
 //                registry.requestMatchers("/admin/login").permitAll(); 
 //                registry.requestMatchers("/admins/**").hasRole("admin");
 //                registry.requestMatchers("/user/**").hasRole("user");
 //                registry.anyRequest().authenticated();
-            	
-            	//test purpose security off 
-            	registry.anyRequest().permitAll();
-            })
-            .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-           .addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+                    //test purpose security off
+                    registry.anyRequest().permitAll();
+                })
+                .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }
@@ -60,8 +59,8 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        //configuration.setAllowedOrigins(List.of("http://localhost:3000")); // Frontend URL
-        configuration.setAllowedOrigins(List.of("https://mtcreact.onrender.com")); 
+//        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // Frontend URL
+        configuration.setAllowedOrigins(List.of("https://mtcreact.onrender.com"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
